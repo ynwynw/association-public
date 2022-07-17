@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.muxi.association.mapper.ActivityRegisterMapper">
+    <select id="selectAcRegisterVoListByCondition" resultType="com.muxi.association.pojo.vo.ActivityRegisterVo">
+        SELECT AR.id, AR.register_status, AR.activity_id, AR.user_id, A.title, A.level, A.credit ac_credit, A.activity_start_time, A.activity_end_time, U.username, U.credit, U.phone
+        FROM activity_register AR
+        LEFT JOIN activity A ON A.id = AR.activity_id
+        LEFT JOIN user U ON U.id = AR.user_id
+        WHERE 1=1
+        <if test="title != null" >
+            and A.title like concat('%',#{title},'%')
+        </if>
+        <if test="registerStatus != null" >
+            and AR.register_status = #{registerStatus}
+        </if>
+        <if test="userId != null" >
+            and AR.user_id = #{userId}
+        </if>
+        LIMIT #{pageNum}, #{limit}
+    </select>
+
+    <select id="selectAcRegisterVoCountByCondition" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM activity_register AR
+        LEFT JOIN activity A ON A.id = AR.activity_id
+        LEFT JOIN user U ON U.id = AR.user_id
+        WHERE 1=1
+        <if test="title != null" >
+            and A.title like concat('%',#{title},'%')
+        </if>
+        <if test="registerStatus != null" >
+            and AR.register_status = #{registerStatus}
+        </if>
+        <if test="userId != null" >
+            and AR.user_id = #{userId}
+        </if>
+    </select>
+
+</mapper>

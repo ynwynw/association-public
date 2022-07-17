@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.muxi.association.mapper.UserMapper">
+    <select id="selectUserRoleListByCondition" resultType="com.muxi.association.pojo.vo.UserRoleVo">
+        SELECT user.*, role.authority, role.role
+        FROM user LEFT JOIN role on user.role_id = role.id WHERE 1=1
+        <if test="username != null" >
+            and username like concat('%',#{username},'%')
+        </if>
+        <if test="credit != null" >
+            and credit >= #{credit}
+        </if>
+        <if test="authority != null" >
+            and authority = #{authority}
+        </if>
+        LIMIT #{pageNum}, #{limit}
+    </select>
+
+    <select id="selectUserRoleCountByCondition" resultType="java.lang.Long">
+        SELECT count(*)
+        FROM user LEFT JOIN role on user.role_id = role.id WHERE 1=1
+        <if test="username != null" >
+            and username like concat('%',#{username},'%')
+        </if>
+        <if test="credit != null" >
+            and credit >= #{credit}
+        </if>
+        <if test="authority != null" >
+            and authority = #{authority}
+        </if>
+    </select>
+</mapper>

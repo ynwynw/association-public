@@ -1,0 +1,61 @@
+# DataSource Config
+#配置数据源
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/association3?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false # MySQL在高版本需要指明是否进行SSL连接 解决则加上 &useSSL=false
+    name: association
+    username: root
+    password: root
+    platform: mysql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #  ===================== ↓↓↓↓↓↓  使用druid数据源  ↓↓↓↓↓↓ =====================
+    # 连接池类型，druid连接池springboot暂无法默认支持，需要自己配置bean
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 5   # 连接池初始化连接数量
+
+    minIdle: 5       # 连接池最小空闲数
+    maxActive: 20    # 连接池最大活跃连接数
+    maxWait: 60000                        # 配置获取连接等待超时的时间
+    timeBetweenEvictionRunsMillis: 60000  # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    minEvictableIdleTimeMillis: 300000    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    validationQuery: SELECT 1 FROM DUAL   # 连接是否有效的查询语句
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    # 打开PSCache，并且指定每个连接上PSCache的大小
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    removeAbandoned: true
+    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，【 'stat':监控统计  'wall'：用于防火墙，防御sql注入   'slf4j':日志 】
+    filters: stat,wall,slf4j
+    # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    #useGlobalDataSourceStat: true  # 合并多个DruidDataSource的监控数据
+    loginUsername: admin # SQL监控后台登录用户名
+    loginPassword: admin  # SQL监控后台登录用户密码
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    mode: HTML
+  jackson:
+    time-zone: GMT+8
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  global-config:
+    db-config:
+      id-type: id_worker
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-enums-package: com.muxi.association.enums
+
+# Logger Config
+logging:
+  level:
+    com.baomidou.mybatisplus.samples.quickstart: debug
+server:
+  port: 8121

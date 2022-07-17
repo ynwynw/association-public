@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.muxi.association.mapper.ScoreMapper">
+    <select id="selectScoreVoListByCondition" resultType="com.muxi.association.pojo.vo.ScoreVo">
+        SELECT S.id, S.grade, S.comment, A.title, A.`level`, U.username, U.phone
+        FROM score S
+        LEFT JOIN activity A ON A.id = S.activity_id
+        LEFT JOIN user U ON U.id = S.user_id
+        WHERE 1=1
+        <if test="title != null" >
+            and A.title like concat('%',#{title},'%')
+        </if>
+        <if test="level != null" >
+            and A.level = #{level}
+        </if>
+        LIMIT #{pageNum}, #{limit}
+    </select>
+
+    <select id="selectScoreVoByCountCondition" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM score S
+        LEFT JOIN activity A ON A.id = S.activity_id
+        LEFT JOIN user U ON U.id = S.user_id
+        WHERE 1=1
+        <if test="title != null" >
+            and A.title like concat('%',#{title},'%')
+        </if>
+        <if test="level != null" >
+            and A.level = #{level}
+        </if>
+    </select>
+
+</mapper>
