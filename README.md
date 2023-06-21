@@ -4,7 +4,7 @@
 
 **博客地址：[https://blog.csdn.net/2303_76227485/article/details/128660686](https://blog.csdn.net/2303_76227485/article/details/128660686)**
 
-**视频演示：[https://space.bilibili.com/384537280](https://space.bilibili.com/384537280)**
+**视频演示：[https://www.bilibili.com/video/BV1vu411a7MG/](https://www.bilibili.com/video/BV1vu411a7MG/)**
 
 **毕业设计所有选题地址：[https://github.com/ynwynw/allProject](https://github.com/ynwynw/allProject)**
 
@@ -82,7 +82,7 @@ http://localhost:8121/back/login
 3. 修改application.yml 里面的数据库配置和redis配置
 4. 启动项目
    	
-   **需要完整代码可以加qq  931708230 或者加微信 ynwwxid**
+**完整代码收费  加qq  931708230 或者加微信  ynwwxid**
 
-**需要完整代码可以加qq  931708230 或者加微信  ynwwxid**
+**接毕业设计和论文**
 
